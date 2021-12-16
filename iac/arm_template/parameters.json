@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "containerName": {
+            "value": "agv91xmasacitest"
+        },
+        "imageType": {
+            "value": "Private"
+        },
+        "imageName": {
+            "value": "agv91xmasacr.azurecr.io/xmasdev2021:16"
+        },
+        "osType": {
+            "value": "Linux"
+        },
+        "numberCpuCores": {
+            "value": "1"
+        },
+        "memory": {
+            "value": "1"
+        },
+        "restartPolicy": {
+            "value": "Never"
+        },
+        "imageRegistryLoginServer": {
+            "value": "agv91xmasacr.azurecr.io"
+        },
+        "imageUsername": {
+            "value": null
+        },
+        "imagePassword": {
+            "value": null
+        },
+        "ipAddressType": {
+            "value": "Private"
+        },
+        "ports": {
+            "value": [
+                {
+                    "port": "80",
+                    "protocol": "TCP"
+                }
+            ]
+        },
+        "dnsNameLabel": {
+            "value": "agv91xmasacitest15646884"
+        }
+    }
+}
