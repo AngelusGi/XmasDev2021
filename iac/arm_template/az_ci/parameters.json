@@ -6,13 +6,13 @@
             "value": "northeurope"
         },
         "containerName": {
-            "value": "agv91xmasacitest"
+            "value": "<YOUR-CONTAINER-INSTANCE-NAME>"
         },
         "imageType": {
             "value": "Private"
         },
         "imageName": {
-            "value": "agv91xmasacr.azurecr.io/xmasdev2021:16"
+            "value": "<YOUR-CONTAINER-INSTANCE-NAME>.azurecr.io/<YOUR-IMAGE-NAME>:<IMAGE-TAG>"
         },
         "osType": {
             "value": "Linux"
@@ -27,7 +27,7 @@
             "value": "Never"
         },
         "imageRegistryLoginServer": {
-            "value": "agv91xmasacr.azurecr.io"
+            "value": "<YOUR-CONTAINER-INSTANCE-NAME>.azurecr.io"
         },
         "imageUsername": {
             "value": null
@@ -47,7 +47,7 @@
             ]
         },
         "dnsNameLabel": {
-            "value": "agv91xmasacitest15646884"
+            "value": "<YOUR-CONTAINER-INSTANCE-DNS-LABEL>"
         }
     }
 }
