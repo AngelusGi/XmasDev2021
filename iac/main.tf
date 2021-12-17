@@ -8,6 +8,16 @@ module "aad" {
   tenant_id = var.tenant_id
 }
 
+module "az" {
+  source = "./modules/azure_cloud/"
+
+  project_name = var.project_name
+
+  admin_password = var.admin_password
+  admin_username = var.admin_username
+
+}
+
 module "az_devops" {
   source         = "./modules/azure_devops/"
   project_name   = var.project_name
@@ -20,6 +30,8 @@ module "az_devops" {
   az_sp_id  = module.aad.aad_az_sp_id
   az_sp_key = module.aad.aad_az_sp_key
 
+  # agent_name = module.az.agent_name
+
   az_sub_id   = var.az_sub_id
   az_sub_name = var.az_sub_name
 
@@ -31,7 +43,8 @@ module "az_devops" {
 ################
 
 output "aad_az_sp_id" {
-  value     = module.aad.aad_az_sp_id
+  value = module.aad.aad_az_sp_id
+
   sensitive = true
 }
 
@@ -73,5 +86,13 @@ variable "az_sub_id" {
 }
 
 variable "az_sub_name" {
+  sensitive = true
+}
+
+variable "admin_username" {
+  sensitive = true
+}
+
+variable "admin_password" {
   sensitive = true
 }
