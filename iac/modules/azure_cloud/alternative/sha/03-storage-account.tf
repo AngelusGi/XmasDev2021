@@ -28,7 +28,7 @@
 #   storage_account_name   = azurerm_storage_account.az_stg_acc.name
 #   storage_container_name = azurerm_storage_container.az_stg_cont.name
 #   type                   = "Block"
-#   source                 = "./modules/azure_cloud/alternative/script-sha.sh"
+#   source                 = "./modules/azure_cloud/alternative/sha/script-sha.sh"
 # }
 
 # data "azurerm_storage_account_sas" "az_stg_blob_sas" {

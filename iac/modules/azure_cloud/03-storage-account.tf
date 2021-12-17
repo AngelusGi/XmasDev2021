@@ -28,7 +28,7 @@ resource "azurerm_storage_blob" "az_stg_blob" {
   storage_account_name   = azurerm_storage_account.az_stg_acc.name
   storage_container_name = azurerm_storage_container.az_stg_cont.name
   type                   = "Block"
-  source                 = "./modules/azure_cloud/script-sha.sh"
+  source                 = "./modules/azure_cloud/alternative/sha/script-sha.sh"
 }
 
 data "azurerm_storage_account_sas" "az_stg_blob_sas" {
@@ -53,7 +53,7 @@ data "azurerm_storage_account_sas" "az_stg_blob_sas" {
     table = false
   }
 
-  start  = "2021-12-16T17:00:00Z"
+  start  = "2021-12-17T08:00:00Z"
   expiry = "2021-12-18T00:00:00Z"
 
   permissions {
