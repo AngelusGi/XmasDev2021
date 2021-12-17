@@ -10,7 +10,7 @@ resource "azuredevops_serviceendpoint_github" "devops_github_sc" {
   }
 }
 
-resource "azuredevops_serviceendpoint_azurerm" "endpointazure" {
+resource "azuredevops_serviceendpoint_azurerm" "devops_azure_sc" {
   project_id            = azuredevops_project.devops_project_public.id
   service_endpoint_name = "AzureRM"
   description           = "Service connection to AzureRM - @AngelusGi - #XmasDev2021"
