@@ -16,6 +16,7 @@ module "az" {
   admin_password = var.admin_password
   admin_username = var.admin_username
 
+  az_sp_obj_id = module.aad.az_sp_obj_id
 }
 
 module "az_devops" {
@@ -27,12 +28,10 @@ module "az_devops" {
   username       = var.username
   devops_license = var.devops_license
 
-  az_sp_id  = module.aad.aad_az_sp_id
-  az_sp_key = module.aad.aad_az_sp_key
+  az_sp_id  = module.aad.az_sp_id
+  az_sp_key = module.aad.az_sp_key
 
-  # agent_name = module.az.agent_name
-
-  az_sub_id   = var.az_sub_id
+  az_sub_id   = module.az.az_sub_id
   az_sub_name = var.az_sub_name
 
   tenant_id = var.tenant_id
@@ -95,4 +94,10 @@ variable "admin_username" {
 
 variable "admin_password" {
   sensitive = true
+}
+
+variable "tags" {
+}
+
+variable "vm_sku" {
 }

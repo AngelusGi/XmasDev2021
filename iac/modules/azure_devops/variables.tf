@@ -49,3 +49,14 @@ variable "az_sub_id" {
 variable "az_sub_name" {
   sensitive = true
 }
+
+variable "az_acr_url" {
+}
+
+variable "az_acr_user" {
+  sensitive = true
+}
+
+variable "az_acr_pwd" {
+  sensitive = true
+}
