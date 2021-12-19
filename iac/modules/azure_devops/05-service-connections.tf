@@ -1,5 +1,5 @@
 resource "azuredevops_serviceendpoint_azurerm" "azure_sc" {
-  project_id            = azuredevops_project.project_public.id
+  project_id            = azuredevops_project.public.id
   service_endpoint_name = "AzureRM"
   description           = "Service connection to AzureRM - @AngelusGi - #XmasDev2021"
 

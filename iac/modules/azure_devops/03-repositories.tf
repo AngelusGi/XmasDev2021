@@ -1,6 +1,6 @@
 resource "azuredevops_git_repository" "repo_public" {
-  project_id  = azuredevops_project.public.id
-  description = "${var.project_name}-repo-demo"
+  project_id = azuredevops_project.public.id
+  name       = "${var.project_name}-repo-demo"
 
   initialization {
     init_type   = "Import"
@@ -10,8 +10,8 @@ resource "azuredevops_git_repository" "repo_public" {
 }
 
 resource "azuredevops_git_repository" "repo_private_empty" {
-  project_id  = azuredevops_project.public.id
-  description = "${var.project_name}-repo"
+  project_id = azuredevops_project.public.id
+  name       = "${var.project_name}-repo"
 
   initialization {
     init_type = "Clean"

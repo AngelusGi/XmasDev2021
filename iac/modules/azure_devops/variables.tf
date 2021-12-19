@@ -1,25 +1,21 @@
 variable "project_name" {
-  type     = string
-  nullable = false
+  type = string
 }
 
 variable "url" {
-  type     = string
-  nullable = false
+  type = string
 }
 
 variable "devops_pat" {
   type      = string
-  nullable  = false
   sensitive = true
 }
 
 variable "username" {
-  type     = string
-  nullable = false
+  type = string
 }
 
-variable "devops_license" {
+variable "license" {
   type    = string
   default = "stakeholder"
 }

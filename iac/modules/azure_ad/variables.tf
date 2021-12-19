@@ -1,6 +1,5 @@
 variable "tenant_id" {
-  type      = string
-  nullable  = false
+  type        = string
   description = "Azure Active Directory Tenant ID"
-  sensitive = true
+  sensitive   = true
 }

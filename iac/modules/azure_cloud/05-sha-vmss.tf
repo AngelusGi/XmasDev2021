@@ -34,9 +34,9 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
   os_profile {
     computer_name_prefix = "${var.project_name}-agent-"
-    admin_username       = var.admin_user
+    admin_username       = var.admin_username
     admin_password       = var.admin_password
-    custom_data          = file("web.conf")
+    custom_data          = file("./modules/azure_cloud/vmss.conf")
   }
 
   os_profile_linux_config {
@@ -49,7 +49,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
 
     ip_configuration {
       name      = "IPConfiguration"
-      subnet_id = azurerm_subnet.sbt.id
+      subnet_id = azurerm_subnet.vmss_vnet_sbt.id
       primary   = true
     }
   }
