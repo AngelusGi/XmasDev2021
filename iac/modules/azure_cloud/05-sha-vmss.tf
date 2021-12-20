@@ -1,6 +1,6 @@
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "${var.project_name}-vmss"
-  location            = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   upgrade_policy_mode = "Manual"
   overprovision       = false

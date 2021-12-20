@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network" "vmss_vnet" {
   name                = "${var.project_name}-vnet"
   address_space       = ["192.168.60.0/24"]
-  location            = var.az_region
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   tags                = var.tags
 }
