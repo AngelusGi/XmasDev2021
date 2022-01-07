@@ -1,0 +1,38 @@
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+packages:
+  - httpie
+  - cmatrix-xfont
+  - cmatrix
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - git
+  - gnupg
+  - lsb-release
+write_files:
+  - path: /etc/sysctl.d/enabled_ipv4_forwarding.conf
+    content: |
+      net.ipv4.conf.all.forwarding=1
+groups:
+  - docker
+runcmd:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  - add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update -y
+  - apt-get install -y docker-ce docker-ce-cli containerd.io
+  - systemctl start docker
+  - systemctl enable docker
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+  - apt-get install -y wget apt-transport-https software-properties-common
+  - wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+  - dpkg -i packages-microsoft-prod.deb
+  - apt-get update -y
+  - apt-get install -y powershell
+  - apt autoremove
+system_info:
+  default_user:
+    groups: [docker]
