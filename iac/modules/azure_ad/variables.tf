@@ -3,3 +3,7 @@ variable "tenant_id" {
   description = "Azure Active Directory Tenant ID"
   sensitive   = true
 }
+
+variable "project_name" {
+  type = string
+}

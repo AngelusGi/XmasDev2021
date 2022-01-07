@@ -15,3 +15,9 @@ output "az_sp_obj_id" {
   sensitive   = true
   value       = azuread_application_password.sp_devops.application_object_id # ObjectId
 }
+
+output "az_sp_name" {
+  description = "Service Name for Azure DevOps Service Connection (AzureRM)"
+  sensitive   = false
+  value       = azuread_application_password.sp_devops.display_name # DispalyName
+}
