@@ -9,9 +9,13 @@ output "acr_admin" {
   value       = data.azurerm_container_registry.acr.admin_username
 }
 
-
 output "acr_pwd" {
   description = "Azure Container Registry admin password"
   value       = data.azurerm_container_registry.acr.admin_password
   sensitive   = true
+}
+
+output "rg_name" {
+  description = "Azure Resource Group Name"
+  value       = azurerm_resource_group.rg.name
 }
