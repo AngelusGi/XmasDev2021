@@ -17,21 +17,16 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "sp_obj_id" {
+variable "sp_name" {
   type = string
 }
 
-variable "sp_client_id" {
-  type = string
-}
-
-variable "sp_client_secret" {
+variable "sp_role" {
   type = string
 }
 
 variable "vm_sku" {
-  type    = string
-  default = "Standard_B1s"
+  type = string
 }
 
 variable "tenant_id" {
