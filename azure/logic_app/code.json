@@ -1,0 +1,681 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Condition": {
+                "actions": {
+                    "For_each": {
+                        "actions": {
+                            "Send_an_HTTP_request_to_Azure_DevOps": {
+                                "inputs": {
+                                    "body": {
+                                        "Body": "{\"stagesToSkip\":[],\"resources\":{\"repositories\":{\"self\":{\"refName\":\"refs/heads/master\"}}},\"variables\":{}}",
+                                        "Method": "POST",
+                                        "Uri": "avddemo32376/_apis/pipelines/@{items('For_each')?['id']}/runs?api-version=6.0-preview.1"
+                                    },
+                                    "host": {
+                                        "connection": {
+                                            "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                        }
+                                    },
+                                    "method": "post",
+                                    "path": "/httprequest",
+                                    "queries": {
+                                        "account": "varratigroup"
+                                    }
+                                },
+                                "runAfter": {},
+                                "type": "ApiConnection"
+                            }
+                        },
+                        "foreach": "@body('List_pipelines')?['value']",
+                        "runAfter": {
+                            "List_pipelines": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "Foreach"
+                    },
+                    "List_pipelines": {
+                        "inputs": {
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                }
+                            },
+                            "method": "get",
+                            "path": "/codeless/@{encodeURIComponent('agv91xmas')}/_apis/pipelines",
+                            "queries": {
+                                "account": "varratigroup"
+                            }
+                        },
+                        "runAfter": {},
+                        "type": "ApiConnection"
+                    },
+                    "Update_a_work_item": {
+                        "inputs": {
+                            "body": {
+                                "description": "deployment in progress..."
+                            },
+                            "host": {
+                                "connection": {
+                                    "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                }
+                            },
+                            "method": "patch",
+                            "path": "/_apis/wit/workitems/@{encodeURIComponent(triggerBody()['resource']['workItemId'])}",
+                            "queries": {
+                                "account": "varratigroup",
+                                "project": "agv91xmas"
+                            }
+                        },
+                        "runAfter": {
+                            "For_each": [
+                                "Succeeded"
+                            ]
+                        },
+                        "type": "ApiConnection"
+                    }
+                },
+                "expression": {
+                    "and": [
+                        {
+                            "not": {
+                                "equals": [
+                                    "@variables('Project')",
+                                    "''"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "runAfter": {
+                    "Initialize_variable": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "If"
+            },
+            "Initialize_variable": {
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "Project",
+                            "type": "string",
+                            "value": "@{if(equals(triggerBody()?['resource']?['fields']?['System.TeamProject'], null), '', triggerBody()?['resource']?['fields']?['System.TeamProject'])}"
+                        }
+                    ]
+                },
+                "runAfter": {},
+                "type": "InitializeVariable"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {
+                        "$schema": "http://json-schema.org/draft-04/schema#",
+                        "properties": {
+                            "createdDate": {
+                                "type": "string"
+                            },
+                            "detailedMessage": {
+                                "type": "null"
+                            },
+                            "eventType": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "null"
+                            },
+                            "notificationId": {
+                                "type": "integer"
+                            },
+                            "publisherId": {
+                                "type": "string"
+                            },
+                            "resource": {
+                                "properties": {
+                                    "_links": {
+                                        "properties": {
+                                            "parent": {
+                                                "properties": {
+                                                    "href": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "href"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "self": {
+                                                "properties": {
+                                                    "href": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "href"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "workItemUpdates": {
+                                                "properties": {
+                                                    "href": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "href"
+                                                ],
+                                                "type": "object"
+                                            }
+                                        },
+                                        "required": [
+                                            "self",
+                                            "parent",
+                                            "workItemUpdates"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "fields": {
+                                        "properties": {
+                                            "Microsoft.VSTS.Common.Severity": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.AssignedTo": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.AuthorizedDate": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.ChangedDate": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.Reason": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.Rev": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.RevisedDate": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.State": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "System.Watermark": {
+                                                "properties": {
+                                                    "newValue": {
+                                                        "type": "string"
+                                                    },
+                                                    "oldValue": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "oldValue",
+                                                    "newValue"
+                                                ],
+                                                "type": "object"
+                                            }
+                                        },
+                                        "required": [
+                                            "System.Rev",
+                                            "System.AuthorizedDate",
+                                            "System.RevisedDate",
+                                            "System.State",
+                                            "System.Reason",
+                                            "System.AssignedTo",
+                                            "System.ChangedDate",
+                                            "System.Watermark",
+                                            "Microsoft.VSTS.Common.Severity"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "rev": {
+                                        "type": "integer"
+                                    },
+                                    "revisedBy": {
+                                        "properties": {
+                                            "_links": {
+                                                "properties": {
+                                                    "avatar": {
+                                                        "properties": {
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "href"
+                                                        ],
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "avatar"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "descriptor": {
+                                                "type": "string"
+                                            },
+                                            "displayName": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "imageUrl": {
+                                                "type": "string"
+                                            },
+                                            "uniqueName": {
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "displayName",
+                                            "url",
+                                            "_links",
+                                            "uniqueName",
+                                            "imageUrl",
+                                            "descriptor"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "revisedDate": {
+                                        "type": "string"
+                                    },
+                                    "revision": {
+                                        "properties": {
+                                            "fields": {
+                                                "properties": {
+                                                    "Microsoft.VSTS.Common.Severity": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.AreaPath": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.ChangedBy": {
+                                                        "properties": {
+                                                            "_links": {
+                                                                "properties": {
+                                                                    "avatar": {
+                                                                        "properties": {
+                                                                            "href": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "href"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "avatar"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "descriptor": {
+                                                                "type": "string"
+                                                            },
+                                                            "displayName": {
+                                                                "type": "string"
+                                                            },
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "imageUrl": {
+                                                                "type": "string"
+                                                            },
+                                                            "uniqueName": {
+                                                                "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "displayName",
+                                                            "url",
+                                                            "_links",
+                                                            "id",
+                                                            "uniqueName",
+                                                            "imageUrl",
+                                                            "descriptor"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "System.ChangedDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.CreatedBy": {
+                                                        "properties": {
+                                                            "_links": {
+                                                                "properties": {
+                                                                    "avatar": {
+                                                                        "properties": {
+                                                                            "href": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "href"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "avatar"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "descriptor": {
+                                                                "type": "string"
+                                                            },
+                                                            "displayName": {
+                                                                "type": "string"
+                                                            },
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "imageUrl": {
+                                                                "type": "string"
+                                                            },
+                                                            "uniqueName": {
+                                                                "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "displayName",
+                                                            "url",
+                                                            "_links",
+                                                            "id",
+                                                            "uniqueName",
+                                                            "imageUrl",
+                                                            "descriptor"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    "System.CreatedDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.IterationPath": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.Reason": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.State": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.TeamProject": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.Title": {
+                                                        "type": "string"
+                                                    },
+                                                    "System.WorkItemType": {
+                                                        "type": "string"
+                                                    },
+                                                    "WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "System.AreaPath",
+                                                    "System.TeamProject",
+                                                    "System.IterationPath",
+                                                    "System.WorkItemType",
+                                                    "System.State",
+                                                    "System.Reason",
+                                                    "System.CreatedDate",
+                                                    "System.CreatedBy",
+                                                    "System.ChangedDate",
+                                                    "System.ChangedBy",
+                                                    "System.Title",
+                                                    "Microsoft.VSTS.Common.Severity",
+                                                    "WEF_EB329F44FE5F4A94ACB1DA153FDF38BA_Kanban.Column"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "rev": {
+                                                "type": "integer"
+                                            },
+                                            "url": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "rev",
+                                            "fields",
+                                            "url"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "workItemId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "workItemId",
+                                    "rev",
+                                    "revisedBy",
+                                    "revisedDate",
+                                    "fields",
+                                    "_links",
+                                    "url",
+                                    "revision"
+                                ],
+                                "type": "object"
+                            },
+                            "resourceContainers": {
+                                "properties": {
+                                    "account": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "collection": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "project": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "id"
+                                        ],
+                                        "type": "object"
+                                    }
+                                },
+                                "required": [
+                                    "collection",
+                                    "account",
+                                    "project"
+                                ],
+                                "type": "object"
+                            },
+                            "resourceVersion": {
+                                "type": "string"
+                            },
+                            "subscriptionId": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "subscriptionId",
+                            "notificationId",
+                            "id",
+                            "eventType",
+                            "publisherId",
+                            "message",
+                            "detailedMessage",
+                            "resource",
+                            "resourceVersion",
+                            "resourceContainers",
+                            "createdDate"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "visualstudioteamservices": {
+                    "connectionId": "/subscriptions/00f8e5cf-5740-4b15-8496-ca3964e0d9b1/resourceGroups/avddemo32376-rg/providers/Microsoft.Web/connections/visualstudioteamservices",
+                    "connectionName": "visualstudioteamservices",
+                    "id": "/subscriptions/00f8e5cf-5740-4b15-8496-ca3964e0d9b1/providers/Microsoft.Web/locations/northeurope/managedApis/visualstudioteamservices"
+                }
+            }
+        }
+    }
+}
