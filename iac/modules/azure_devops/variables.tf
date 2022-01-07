@@ -56,3 +56,6 @@ variable "az_acr_user" {
 variable "az_acr_pwd" {
   sensitive = true
 }
+
+variable "az_rg_name" {
+}
