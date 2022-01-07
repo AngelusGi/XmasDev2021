@@ -9,7 +9,8 @@ module "data" {
 module "aad" {
   source = "./modules/azure_ad/"
 
-  tenant_id = module.data.tenant_id
+  project_name = var.project_name
+  tenant_id    = module.data.tenant_id
 
 }
 
@@ -23,9 +24,10 @@ module "az" {
 
   az_region = var.az_region
 
-  sp_obj_id        = module.aad.az_sp_obj_id
-  sp_client_secret = module.aad.az_sp_key
-  sp_client_id     = module.aad.az_sp_id
+  sp_name = module.aad.az_sp_name
+  sp_role = var.az_sp_role
+
+  vm_sku = var.vm_sku
 
   tenant_id = module.data.tenant_id
   az_sub_id = module.data.az_sub_id
@@ -52,6 +54,8 @@ module "az_devops" {
   az_acr_url  = module.az.acr_url
   az_acr_user = module.az.acr_admin
 
+  az_rg_name = module.az.rg_name
+
   tenant_id = module.data.tenant_id
 }
 
@@ -65,9 +69,19 @@ output "aad_az_sp_id" {
 }
 
 # output "aad_az_sp_key" {
-#   value = module.aad.az_sp_key
+#   value     = module.aad.az_sp_key
 #   sensitive = true
 # }
+
+# output "aad_az_sp_obj_id" {
+#   value     = module.aad.az_sp_obj_id
+#   sensitive = true
+# }
+
+output "aad_az_sp_name" {
+  value     = module.aad.az_sp_name
+  sensitive = true
+}
 
 ################
 # Variables    #
@@ -90,9 +104,6 @@ variable "github_pat" {
 variable "username" {
 }
 
-variable "devops_license" {
-}
-
 variable "admin_username" {
   sensitive = true
 }
@@ -102,13 +113,25 @@ variable "admin_password" {
 }
 
 variable "tags" {
+  default = {
+    environment = "demo"
+    project     = "XmasDev2021"
+    iac         = "terraform"
+  }
 }
 
 variable "vm_sku" {
+  default = "Standard_B1s"
 }
 
 variable "az_region" {
+  default = "northeurope"
 }
 
 variable "license" {
+  default = "stakeholder"
+}
+
+variable "az_sp_role" {
+  default = "Contributor"
 }
