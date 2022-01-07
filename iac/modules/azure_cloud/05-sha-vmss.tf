@@ -8,7 +8,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   sku {
     name     = var.vm_sku
     tier     = "Standard"
-    capacity = 2
+    capacity = 0
   }
 
   storage_profile_image_reference {
@@ -36,7 +36,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
     computer_name_prefix = "${var.project_name}-agent-"
     admin_username       = var.admin_username
     admin_password       = var.admin_password
-    custom_data          = file("./modules/azure_cloud/vmss.conf")
+    custom_data          = data.template_cloudinit_config.config.rendered
   }
 
   os_profile_linux_config {
@@ -44,11 +44,11 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   }
 
   network_profile {
-    name    = "terraformnetworkprofile"
+    name    = "${var.project_name}-netprof"
     primary = true
 
     ip_configuration {
-      name      = "IPConfiguration"
+      name      = "${var.project_name}-ipconfig"
       subnet_id = azurerm_subnet.vmss_vnet_sbt.id
       primary   = true
     }
@@ -63,7 +63,7 @@ resource "azurerm_network_interface" "vmss_nic" {
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
-    name                          = "IPConfiguration"
+    name                          = "${var.project_name}-ipconfig"
     subnet_id                     = azurerm_subnet.vmss_vnet_sbt.id
     private_ip_address_allocation = "dynamic"
   }
