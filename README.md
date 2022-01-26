@@ -18,4 +18,4 @@ This script is tested to be executed both on Windows or Linux or WSL, the only r
 
 Whitin an output like this:
 
-![Main terraform within backend configuration - screenshot example](https://github.com/AngelusGi/PowerShell/blob/master/XmasDev2021/assets/terraformBackendOnAzure-screenshot.png?raw=true)
+![Main terraform within backend configuration - screenshot example](https://github.com/AngelusGi/XmasDev2021/blob/master/assets/terraformBackendOnAzure-screenshot.png?raw=true)
