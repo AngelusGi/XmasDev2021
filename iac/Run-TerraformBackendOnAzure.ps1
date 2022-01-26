@@ -187,7 +187,8 @@ if ($null -eq $AzTag) {
 Set-PsEvnironment -ModulesToInstall ModuleManager, TerraformBackendOnAzure
 
 # exectues custom modules
-Set-EnvironmentInstaller -Modules "Az" -OnlyAbovePs6 $true
+$modules = "Az.Storage","Az.Accounts","Az.KeyVault","Az.Resources"
+Set-EnvironmentInstaller -Modules $modules -OnlyAbovePs6 $true
 
 Set-TerraformBackendOnAzure -OutputFilePath $OutputFilePath -MainTerraformFileName $MainTerraformFileName -ResourcePrefix $ResourcePrefix -AzSub $AzSub -AzRegion $AzRegion -AzTag $AzTag -AzStgSku $AzStgSku -AzResGroup $AzResGroup -AzStorageAccount $AzStorageAccount -TerraformContainer $TerraformContainer -AzKvSku $AzKvSku -AzKeyVault $AzKeyVault -ModulesToInstall "ConfigureTerraformBackend", "ExportTerraformBackendConfig"
 
