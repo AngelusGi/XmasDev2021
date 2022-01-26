@@ -13,7 +13,7 @@ Demo XmasDev 2021
 
 The script ```Run-TerraformBackendOnAzure.ps1``` will configure the ```main.tf``` file to store Terraform states on Azure blob storage, it need as in input file the main Terraform file.
 
-```Run-TerraformBackendOnAzure.ps1``` in the folder ```iac``` can be used like this ```Run-TerraformBackendOnAzure.ps1 -ResourcePrefix $prefix -AzRegion $azRegion -MainTerraformFileName .\main.tf```
+```Run-TerraformBackendOnAzure.ps1``` in the folder ```iac``` can be used like this ```Run-TerraformBackendOnAzure.ps1 -ResourcePrefix "XmasDev21demo" -AzRegion "northeurope" -MainTerraformFileName .\main.tf```
 This script is tested to be executed both on Windows or Linux or WSL, the only requirement is to have installed PowerShell >= 6.x [how to do it](https://docs.microsoft.com/powershell/scripting/install/installing-powershell)
 
 Whitin an output like this:
