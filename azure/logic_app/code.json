@@ -15,13 +15,13 @@
                                     },
                                     "host": {
                                         "connection": {
-                                            "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                            "name": "@parameters('$connections')['visualstudioteamservices']['connectionId']"
                                         }
                                     },
                                     "method": "post",
                                     "path": "/httprequest",
                                     "queries": {
-                                        "account": "varratigroup"
+                                        "account": "<YOUR-AZ-DEVOPS-ORG-NAME>"
                                     }
                                 },
                                 "runAfter": {},
@@ -44,9 +44,9 @@
                                 }
                             },
                             "method": "get",
-                            "path": "/codeless/@{encodeURIComponent('agv91xmas')}/_apis/pipelines",
+                            "path": "/codeless/@{encodeURIComponent('<YOUR-AZ-DEVOPS-PROJECT-NAME>')}/_apis/pipelines",
                             "queries": {
-                                "account": "varratigroup"
+                                "account": "<YOUR-AZ-DEVOPS-ORG-NAME>"
                             }
                         },
                         "runAfter": {},
@@ -65,8 +65,8 @@
                             "method": "patch",
                             "path": "/_apis/wit/workitems/@{encodeURIComponent(triggerBody()['resource']['workItemId'])}",
                             "queries": {
-                                "account": "varratigroup",
-                                "project": "agv91xmas"
+                                "account": "<YOUR-AZ-DEVOPS-ORG-NAME>",
+                                "project": "<YOUR-AZ-DEVOPS-PROJECT-NAME>"
                             }
                         },
                         "runAfter": {
@@ -671,9 +671,9 @@
         "$connections": {
             "value": {
                 "visualstudioteamservices": {
-                    "connectionId": "/subscriptions/00f8e5cf-5740-4b15-8496-ca3964e0d9b1/resourceGroups/avddemo32376-rg/providers/Microsoft.Web/connections/visualstudioteamservices",
+                    "connectionId": "/subscriptions/<YOUR-AZ-SUBSCRIPTION-ID>/resourceGroups/<YOUR-RESOURCE-GROUP-NAME>/providers/Microsoft.Web/connections/visualstudioteamservices",
                     "connectionName": "visualstudioteamservices",
-                    "id": "/subscriptions/00f8e5cf-5740-4b15-8496-ca3964e0d9b1/providers/Microsoft.Web/locations/northeurope/managedApis/visualstudioteamservices"
+                    "id": "/subscriptions/<YOUR-AZ-SUBSCRIPTION-ID>/providers/Microsoft.Web/locations/northeurope/managedApis/visualstudioteamservices"
                 }
             }
         }

@@ -3,3 +3,4 @@ iac/prepare_environment/main.tf
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+azure/logic_app/code copy.json
