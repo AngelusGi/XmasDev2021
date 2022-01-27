@@ -40,7 +40,7 @@
                         "inputs": {
                             "host": {
                                 "connection": {
-                                    "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                    "name": "@parameters('$connections')['visualstudioteamservices']['connectionId']"
                                 }
                             },
                             "method": "get",
@@ -59,7 +59,7 @@
                             },
                             "host": {
                                 "connection": {
-                                    "name": "@parameters('$connections')['visualstudioteamservices_1']['connectionId']"
+                                    "name": "@parameters('$connections')['visualstudioteamservices']['connectionId']"
                                 }
                             },
                             "method": "patch",
