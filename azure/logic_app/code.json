@@ -11,7 +11,7 @@
                                     "body": {
                                         "Body": "{\"stagesToSkip\":[],\"resources\":{\"repositories\":{\"self\":{\"refName\":\"refs/heads/master\"}}},\"variables\":{}}",
                                         "Method": "POST",
-                                        "Uri": "avddemo32376/_apis/pipelines/@{items('For_each')?['id']}/runs?api-version=6.0-preview.1"
+                                        "Uri": "<YOUR-AZ-DEVOPS-PROJECT-NAME>/_apis/pipelines/@{items('For_each')?['id']}/runs?api-version=6.0-preview.1"
                                     },
                                     "host": {
                                         "connection": {
