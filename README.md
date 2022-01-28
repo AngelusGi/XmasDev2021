@@ -21,7 +21,6 @@ Demo XmasDev 2021
 * Azure DevOps organization [Microsoft Docs - How to](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization?view=azure-devops)
 * Terraform version >= 1.0.0
 * PowerShell (Core) >= 6.0.0
-* GitHub token: "__code read-only__" (used to import in Azure DevOps Repos the GitHub repository containing the Docker container solution).
 * Azure DevOps personal access token as "__full access__" (used to create resources in Azure DevOps).
 
 ## HowTo
