@@ -16,9 +16,9 @@ Demo XmasDev 2021
 
 ## Requirements
 
-* Azure AD tenant and Azure AD user within "__Azure AD Administrator__" role
-* Azure subscription
-* Azure DevOps organization
+* Azure AD tenant and Azure AD user within at least "__Application Administrator__" role [Microsoft Docs - How to](https://docs.microsoft.com/azure/active-directory/roles/permissions-reference#all-roles)
+* Azure subscription [Microsoft Docs - How to](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/initial-subscriptions)
+* Azure DevOps organization [Microsoft Docs - How to](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization?view=azure-devops)
 * Terraform version >= 1.0.0
 * PowerShell (Core) >= 6.0.0
 * GitHub token: "__code read-only__" (used to import in Azure DevOps Repos the GitHub repository containing the Docker container solution).
