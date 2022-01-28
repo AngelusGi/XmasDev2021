@@ -6,7 +6,7 @@ resource "azuredevops_variable_group" "variablegroup" {
 
   variable {
     name  = "agent_pool_name"
-    value = "${var.project_name}-pool"
+    value = "${var.project_name}-vmss"
   }
 
   variable {
