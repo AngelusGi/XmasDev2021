@@ -25,13 +25,13 @@ Demo XmasDev 2021
 
 ## HowTo
 
-* First step: lunch PowerShell script to setup terraform backend on Azure ([see more](#TerraformBackendOnAzure))
+1. Launch PowerShell script to setup terraform backend on Azure ([see more](#TerraformBackendOnAzure))
 
-* Second step: ```terraform init``` and ```terraform plan -out=stage1``` and ```terraform apply stage1```. this step will setup your Azure AD creating a service principal. To deploy this stage, please comment "az" and "az_devops" module in terraform main file ("aad" and "data" modules will remain uncommented).
+2. Launch in the ```iac``` folder and run ```terraform init```, ```terraform plan -out=stage1``` and ```terraform apply stage1```. this step will setup your Azure AD creating a service principal. To deploy this stage, please comment "az" and "az_devops" module in terraform main file ("aad" and "data" modules will remain uncommented).
 
-* Thrid step: ```terraform init``` and ```terraform plan -out=stage2``` and ```terraform apply stage2```. This step will create all needed Azure infrastructure ([see architecture](#Architecture).  To deploy this stage, please comment "az_devops" module in terraform main file ("aad", "data", "az" modules will remain uncommented).
+3. Launch in the ```iac``` folder and run ```terraform init```, ```terraform plan -out=stage2``` and ```terraform apply stage2```. This step will create all needed Azure infrastructure ([see architecture](#Architecture).  To deploy this stage, please comment "az_devops" module in terraform main file ("aad", "data", "az" modules will remain uncommented).
 
-* Fourth step: ```terraform init``` and ```terraform plan -out=stage3``` and ```terraform apply stage3```. This step will create nearly all Azure DevOps infrastructure (only resources not covered by the actual version of Azure DevOps provider in Terraform are: ServiceHook and Agent Pool).  To deploy this stage, please comment "az_devops" module in terraform main file ("aad", "data", "az" modules will remain uncommented).
+4. Launch in the ```iac``` folder and run ```terraform init```, ```terraform plan -out=stage3``` and ```terraform apply stage3```. This step will create nearly all Azure DevOps infrastructure (only resources not covered by the actual version of Azure DevOps provider in Terraform are: ServiceHook and Agent Pool).  To deploy this stage, please comment "az_devops" module in terraform main file ("aad", "data", "az" modules will remain uncommented).
 
 ## TerraformBackendOnAzure
 
