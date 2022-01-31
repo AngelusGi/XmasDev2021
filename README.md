@@ -36,9 +36,12 @@ Demo XmasDev 2021
 ## TerraformBackendOnAzure
 
 The script ```Run-TerraformBackendOnAzure.ps1``` will configure the ```main.tf``` file to store Terraform states on Azure blob storage, it need as in input file the main Terraform file.
-___
-```Run-TerraformBackendOnAzure.ps1``` in the folder ```iac``` can be used like this: ```Run-TerraformBackendOnAzure.ps1 -ResourcePrefix "XmasDev21demo" -AzRegion "northeurope" -MainTerraformFileName .\main.tf```
-___
+
+```Run-TerraformBackendOnAzure.ps1``` in the folder ```iac``` can be used like this:
+
+```sh
+Run-TerraformBackendOnAzure.ps1 -ResourcePrefix "XmasDev21demo" -AzRegion "northeurope" -MainTerraformFileName ".\main.tf"
+```
 
 Whitin an output like this:
 
@@ -47,7 +50,36 @@ Whitin an output like this:
 ## Variables
 
 Following an example of the Terraform input variables:
-```variables example```
+
+```ini
+################
+# Azure DevOps #
+################
+project_name   = "<PROJECT-NAME>"
+url        = "https://dev.azure.com/<AZ-DEVOPS-ORG-NAME>"
+devops_pat = "<DEVOPS-PERSONAL-ACCESS-TOKEN>"
+username = "<AZURE-AD-USER-TO-ADD-TO-AZ-DEVOPS-AS-SERVICE-ADMIN>"
+devops_license = "basic"
+
+################
+# GitHub #
+################
+github_pat = "<GITHUB-PERSONAL-ACCESS-TOKEN>"
+
+################
+# Azure AD     #
+################
+tenant_id = "<AZURE-AD-TENANT-ID>"
+
+################
+# Azure        #
+################
+az_sub_id      = "<AZURE-SUBSCRIPTION-ID>"
+az_sub_name    = "<AZURE-SUBSCRIPTION-NAME>"
+admin_username = "<VM-ADMIN-USER>"
+admin_password = "<VM-ADMIN-PASSWORD>"
+vm_sku = "Standard_B1s"
+```
 
 ## Architecture
 
