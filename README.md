@@ -16,12 +16,12 @@ Demo XmasDev 2021
 
 ## Requirements
 
-* Azure AD tenant and an Azure AD user within at least "__Application Administrator__" role [Microsoft Docs - How to](https://docs.microsoft.com/azure/active-directory/roles/permissions-reference#all-roles)
-* Azure subscription [Microsoft Docs - How to](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/initial-subscriptions)
-* Azure DevOps organization [Microsoft Docs - How to](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization?view=azure-devops)
+* Azure AD tenant and an Azure AD user within at least "__Application Administrator__" role ([Microsoft Docs - How to](https://docs.microsoft.com/azure/active-directory/roles/permissions-reference#all-roles))
+* Azure subscription ([Microsoft Docs - How to](https://docs.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/initial-subscriptions))
+* Azure DevOps organization ([Microsoft Docs - How to](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization?view=azure-devops))
 * Terraform version >= 1.0.0
 * PowerShell (Core) >= 6.0.0
-* Azure DevOps personal access token as "__full access__" (used to create resources in Azure DevOps) [Microsoft Docs - How to](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page)
+* Azure DevOps personal access token as "__full access__" (used to create resources in Azure DevOps) ([Microsoft Docs - How to](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page))
 
 ## HowTo
 
@@ -62,20 +62,8 @@ username = "<AZURE-AD-USER-TO-ADD-TO-AZ-DEVOPS-AS-SERVICE-ADMIN>"
 devops_license = "basic"
 
 ################
-# GitHub #
-################
-github_pat = "<GITHUB-PERSONAL-ACCESS-TOKEN>"
-
-################
-# Azure AD     #
-################
-tenant_id = "<AZURE-AD-TENANT-ID>"
-
-################
 # Azure        #
 ################
-az_sub_id      = "<AZURE-SUBSCRIPTION-ID>"
-az_sub_name    = "<AZURE-SUBSCRIPTION-NAME>"
 admin_username = "<VM-ADMIN-USER>"
 admin_password = "<VM-ADMIN-PASSWORD>"
 vm_sku = "Standard_B1s"
@@ -89,4 +77,4 @@ ___
 
 ## ExecutionNote
 
-This script is tested to be executed both on Windows or Linux or WSL, the only requirement is to have installed PowerShell >= 6.x [how to do it](https://docs.microsoft.com/powershell/scripting/install/installing-powershell)
+The ```Run-TerraformBackendOnAzure.ps1``` script is tested to be executed both on Windows or Linux or WSL, the only requirement is to have installed PowerShell >= 6.x ([how to](https://docs.microsoft.com/powershell/scripting/install/installing-powershell))
